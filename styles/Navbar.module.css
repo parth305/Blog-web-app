@@ -1,0 +1,37 @@
+
+.navbar{
+    /* content: ""; */
+    /* z-index: -1; */
+    top: 30px;
+    background-color: black;
+    position: fixed;
+    display: block;
+    width: 90%;
+    margin: auto;
+    left: 4%;
+    border-radius: 14px;
+  }
+  .navbar ul{
+    display: flex;
+    justify-content: center;
+  }
+  .navbar ul li{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-weight: bold;
+    margin: 5px 15px;
+  }
+  
+  .navbar ul li a{
+    padding: 8px 15px;
+    border-radius: 4px;
+  
+  }
+  
+  .navbar ul li a:hover{
+      color: black;
+      background-color: white;
+      cursor: pointer;
+  }
+  
