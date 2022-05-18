@@ -1,7 +1,10 @@
-let reduser=(state={Blogs:[],Blog:null},action)=>{
+let reduser=(state={Blogs:[],Blog:null,total:null},action)=>{
     switch (action.type) {
         case 'GETBLOGS':
-            return {...state,Blogs:action.payload}
+            state.Blogs=state.Blogs.concat(action.payload.data)
+
+            return {...state,total:action.payload.total}
+            // return {...state,Blogs:action.payload.data,total:action.payload.total}
 
         case 'GETBLOG':
             return {...state,Blog:action.payload}

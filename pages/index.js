@@ -4,8 +4,22 @@ import styles from '../styles/Home.module.css'
 // import Script from 'next/script'
 import Link from "next/link"
 import Navbar from '../Components/Navbar'
+import { useDispatch, useSelector } from 'react-redux'
+import loadder from "../loadder.svg"
+import { useContext, useEffect } from 'react'
+import { getblogs } from '../redux/actioncreators/getdata'
+import Pagecontext from '../contextapi/pagecontext'
 // import Dummy from '../Components/dummy'
 export default function Home() {
+  let dispatch=useDispatch();
+  let {Blogs}=useSelector((state)=>state.Blog)
+  let {page,setpage}=useContext(Pagecontext);
+  useEffect(()=>{
+    if (page===1) {
+      dispatch(getblogs(page))
+      setpage(page+1)
+    }
+  },[])
   return (
     <div className={styles.container}>
       {/* <style jsx >                  this is component level styling style
@@ -37,35 +51,25 @@ export default function Home() {
 
         <h2>Populer Blogs</h2>
         <div className={styles.grid}>
-          <Link href="/Blogs/popome" >
-            <a className={styles.card}>
-              <h3>Documentation &rarr;</h3>
-              <p>Find in-depth information about Next.js features and API.</p>
-            </a>
-          </Link>
+          {
+          Blogs.length > 0?
+          
+          Blogs.filter((item, idx) => idx < 4).map(item => {
 
-          <Link href="/Blogs/poptwo" >
-            <a className={styles.card} >
-              <h3>Learn &rarr;</h3>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
-            </a>
-          </Link>
-
-          <Link href="/Blogs/popthree">
-            <a className={styles.card} >
-              <h3>Examples &rarr;</h3>
-              <p>Discover and deploy boilerplate example Next.js projects.</p>
-            </a>
-          </Link>
-
-          <Link href="/Blogs/popfour">
-            <a  className={styles.card}>
-              <h3>Deploy &rarr;</h3>
-              <p>
-                Instantly deploy your Next.js site to a public URL with Vercel.
-              </p>
-            </a>
-          </Link>
+           return <Link href={`${"/Blogs/" + item._id}`} key={item._id}>
+             <a className={styles.card}>
+                <h3>{item.title} &rarr;</h3>
+                <p>{item.metadata.split(" ").slice(0,9).join(" ")}</p>
+             </a>
+           </Link> 
+         }):
+         <Image
+         src={loadder}
+         alt="Picture of the author"
+         width={200}
+         height={200}
+       />
+}
         </div>
       </main>
     </div>

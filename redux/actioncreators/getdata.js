@@ -1,8 +1,11 @@
 import * as api from "../../APIaxios/index"
 
-export let getblogs=()=>async(dispatch)=>{
+export let getblogs=(page)=>async(dispatch)=>{
         try {
-            let {data}=await api.getdata();
+            // console.log("hey");
+            console.log("page",page);
+            let {data}=await api.getdata(page);
+            console.log(data);
             dispatch({type:"GETBLOGS",payload:data})
         } catch (error) {
          console.log(error);   
